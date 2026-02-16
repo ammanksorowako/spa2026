@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olahraga Pickleball Indonesia - Infografis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F1F2F6;
+            color: #2F3542;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        /* Custom Court CSS */
+        .pickle-court {
+            display: grid;
+            grid-template-rows: 1fr 1fr 20px 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            background-color: #3742fa; /* Hard court blue */
+            border: 4px solid white;
+            margin: 0 auto;
+            position: relative;
+        }
+        .court-section {
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        .kitchen {
+            background-color: #2ED573; /* Kitchen Green */
+            grid-column: 1 /span 2;
+        }
+        .net {
+            grid-column: 1 /span 2;
+            background-image: linear-gradient(to right, white 33%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 10px 2px;
+            background-repeat: repeat-x;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #FF4757;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="bg-[#FF4757] text-white p-8 text-center shadow-lg">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-2 uppercase tracking-wide">Pickleball Indonesia</h1>
+        <p class="text-xl md:text-2xl font-light">"Easy & Fun" - Olahraga Untuk Semua</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Introduction -->
+        <section class="md:col-span-2 bg-white p-6 rounded-lg shadow-md border-l-8 border-[#FFA502]">
+            <h2 class="text-3xl font-bold mb-4 text-[#FF4757]">Apa itu Pickleball?</h2>
+            <p class="mb-4 text-lg leading-relaxed">
+                Pickleball adalah olahraga yang menggabungkan unsur tenis, bulu tangkis, dan tenis meja. Dimainkan dengan paddle (pemukul) dan bola plastik berlubang di atas lapangan seluas 20 x 44 kaki. Olahraga ini dikenal dengan slogan <strong>"Easy and Fun"</strong> karena mudah dipelajari dan menyenangkan bagi segala usia.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center mt-6">
+                <div class="p-4 bg-[#F1F2F6] rounded-lg">
+                    <div class="text-4xl mb-2">🏓</div>
+                    <h3 class="font-bold">Paddle</h3>
+                    <p class="text-sm">Composite/Kayu</p>
+                </div>
+                <div class="p-4 bg-[#F1F2F6] rounded-lg">
+                    <div class="text-4xl mb-2">🟡</div>
+                    <h3 class="font-bold">Wiffle Ball</h3>
+                    <p class="text-sm">Plastik Berlubang</p>
+                </div>
+                <div class="p-4 bg-[#F1F2F6] rounded-lg">
+                    <div class="text-4xl mb-2">🥅</div>
+                    <h3 class="font-bold">Net Rendah</h3>
+                    <p class="text-sm">Tinggi 36 Inci</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Global History & Growth -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-[#2ED573]">Asal Usul & Pertumbuhan Global</h2>
+            <p class="mb-6 text-sm">
+                Lahir pada Musim Semi 1965 di Bainbridge Island, USA, oleh Joel Pritchard, Bill Bell, dan Barney McCallum. Awalnya permainan untuk mengusir kebosanan keluarga, kini menjadi fenomena global. Pada 2018, tercatat 4,8 juta pemain di AS dengan pertumbuhan partisipasi mencapai 40% di tahun 2019.
+            </p>
+            <div class="chart-container">
+                <canvas id="growthChart"></canvas>
+            </div>
+            <p class="mt-4 text-xs text-center text-gray-500 italic">Data: Sports & Fitness Industry Association (USA)</p>
+        </section>
+
+        <!-- Indonesian Timeline -->
+        <section class="bg-white p-6 rounded-lg shadow-md relative overflow-hidden">
+            <h2 class="text-2xl font-bold mb-8 text-[#FF4757]">Perjalanan di Indonesia</h2>
+            <div class="relative">
+                <div class="timeline-line hidden md:block"></div>
+                
+                <!-- Event 1 -->
+                <div class="mb-8 flex flex-col md:flex-row items-center justify-between relative z-10">
+                    <div class="w-full md:w-5/12 text-center md:text-right pr-0 md:pr-8">
+                        <h3 class="text-xl font-bold">1979</h3>
+                        <p class="text-sm">Diperkenalkan pertama kali oleh Bill & Tin Bell di Jakarta (Lingkungan Kedutaan AS).</p>
+                    </div>
+                    <div class="w-8 h-8 bg-[#FFA502] rounded-full border-4 border-white shadow my-2 md:my-0"></div>
+                    <div class="w-full md:w-5/12 pl-0 md:pl-8"></div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="mb-8 flex flex-col md:flex-row items-center justify-between relative z-10">
+                    <div class="w-full md:w-5/12 text-center md:text-right pr-0 md:pr-8"></div>
+                    <div class="w-8 h-8 bg-[#2ED573] rounded-full border-4 border-white shadow my-2 md:my-0"></div>
+                    <div class="w-full md:w-5/12 pl-0 md:pl-8 text-center md:text-left">
+                        <h3 class="text-xl font-bold">April 2019</h3>
+                        <p class="text-sm">Jeff van Der Hulst (IFP) mengunjungi UNJ, memperkenalkan Pickleball secara akademis.</p>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="mb-8 flex flex-col md:flex-row items-center justify-between relative z-10">
+                    <div class="w-full md:w-5/12 text-center md:text-right pr-0 md:pr-8">
+                        <h3 class="text-xl font-bold">2020</h3>
+                        <p class="text-sm">Munas Pertama & Pilot Project di Sekolah-sekolah.</p>
+                    </div>
+                    <div class="w-8 h-8 bg-[#FF4757] rounded-full border-4 border-white shadow my-2 md:my-0"></div>
+                    <div class="w-full md:w-5/12 pl-0 md:pl-8"></div>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="mb-8 flex flex-col md:flex-row items-center justify-between relative z-10">
+                    <div class="w-full md:w-5/12 text-center md:text-right pr-0 md:pr-8"></div>
+                    <div class="w-8 h-8 bg-[#2F3542] rounded-full border-4 border-white shadow my-2 md:my-0"></div>
+                    <div class="w-full md:w-5/12 pl-0 md:pl-8 text-center md:text-left">
+                        <h3 class="text-xl font-bold">13 Maret 2023</h3>
+                        <p class="text-sm">Indonesia Pickleball Federation (IPF) resmi menjadi anggota KONI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Court Diagram -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-[#2ED573]">Lapangan & Area Permainan</h2>
+            <p class="mb-6 text-sm">
+                Ukuran lapangan adalah 20 x 44 kaki (sama untuk tunggal dan ganda). Area unik disebut "Kitchen" atau Zona Non-Voli (NVZ) berjarak 7 kaki dari net. Pemain dilarang melakukan pukulan voli (memukul bola tanpa memantul) di dalam area ini.
+            </p>
+            <div class="flex justify-center">
+                <div class="pickle-court shadow-xl">
+                    <!-- Top Side -->
+                    <div class="court-section bg-[#3742fa]">Sisi Kanan (Genap)</div>
+                    <div class="court-section bg-[#3742fa]">Sisi Kiri (Ganjil)</div>
+                    
+                    <!-- Kitchen Top -->
+                    <div class="court-section kitchen">KITCHEN (Non-Volley Zone)</div>
+                    
+                    <!-- Net -->
+                    <div class="net">NET (Tinggi 36 inch)</div>
+                    
+                    <!-- Kitchen Bottom -->
+                    <div class="court-section kitchen">KITCHEN (Non-Volley Zone)</div>
+                    
+                    <!-- Bottom Side -->
+                    <div class="court-section bg-[#3742fa]">Sisi Kiri (Ganjil)</div>
+                    <div class="court-section bg-[#3742fa]">Sisi Kanan (Genap)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Techniques Breakdown -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4 text-[#FFA502]">Teknik Dasar Permainan</h2>
+            <p class="mb-4 text-sm">
+                Pickleball menuntut keseimbangan antara strategi menyerang dan bertahan. Berikut adalah komponen utama dalam permainan yang perlu dikuasai.
+            </p>
+            <div class="chart-container">
+                <canvas id="techniquesChart"></canvas>
+            </div>
+            <div class="mt-6 space-y-2">
+                <div class="flex items-center">
+                    <span class="w-3 h-3 rounded-full bg-[#FF4757] mr-2"></span>
+                    <span class="text-sm font-bold">Serve:</span>
+                    <span class="text-sm ml-1">Pukulan bawah tangan (Underhand) untuk memulai.</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-3 h-3 rounded-full bg-[#2ED573] mr-2"></span>
+                    <span class="text-sm font-bold">Dink:</span>
+                    <span class="text-sm ml-1">Pukulan halus di dekat net (Kitchen).</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-3 h-3 rounded-full bg-[#FFA502] mr-2"></span>
+                    <span class="text-sm font-bold">Drive:</span>
+                    <span class="text-sm ml-1">Pukulan keras mendatar dari belakang.</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-3 h-3 rounded-full bg-[#2F3542] mr-2"></span>
+                    <span class="text-sm font-bold">Volley:</span>
+                    <span class="text-sm ml-1">Memukul bola di udara sebelum memantul.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Radar -->
+        <section class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-2xl font-bold mb-4 text-[#FF4757]">Manfaat Holistik Pickleball</h2>
+                    <p class="mb-4 text-lg">
+                        Riset menunjukkan bahwa Pickleball bukan sekadar olahraga fisik, tetapi juga "Vaksin" bagi kesehatan mental dan sosial. Sangat populer di kalangan lansia karena rendah risiko cedera namun efektif menjaga kebugaran jantung.
+                    </p>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex items-center p-3 bg-red-50 rounded">
+                            <span class="text-2xl mr-3">❤️</span>
+                            <div>
+                                <strong class="block text-[#FF4757]">Kesehatan Fisik</strong>
+                                <span class="text-sm">Keseimbangan, kelincahan, dan kardio ringan.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center p-3 bg-green-50 rounded">
+                            <span class="text-2xl mr-3">🧠</span>
+                            <div>
+                                <strong class="block text-[#2ED573]">Kesehatan Mental</strong>
+                                <span class="text-sm">Mengurangi stres, meningkatkan fungsi psikologis.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center p-3 bg-yellow-50 rounded">
+                            <span class="text-2xl mr-3">🤝</span>
+                            <div>
+                                <strong class="block text-[#FFA502]">Interaksi Sosial</strong>
+                                <span class="text-sm">Menumbuhkan solidaritas, pertemanan, dan inklusivitas.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart-container">
+                    <canvas id="benefitsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#2F3542] text-white text-center p-6 mt-8">
+        <p class="mb-2">Sumber Data: Buku "Olahraga Pickleball Indonesia" oleh Susilo, M.Pd., D.Ed. (UNJ Press, 2023)</p>
+        <p class="text-sm opacity-75">Infografis Interaktif Pickleball Indonesia</p>
+    </footer>
+
+    <script>
+        // --- UTILITY FUNCTIONS ---
+        // Helper function to wrap long labels for Chart.js
+        function splitLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxLength) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // Shared Tooltip Config
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- CHART GENERATION ---
+
+        // 1. Growth Chart (Bar)
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        const labelsGrowth = ['Pemain AS 2018', 'Pertumbuhan 2019'];
+        const processedLabelsGrowth = labelsGrowth.map(l => splitLabel(l));
+
+        new Chart(ctxGrowth, {
+            type: 'bar',
+            data: {
+                labels: processedLabelsGrowth,
+                datasets: [{
+                    label: 'Metrik Pertumbuhan',
+                    data: [4.8, 40], // 4.8 Million, 40 Percent (Different scales, handled visually)
+                    backgroundColor: ['#FF4757', '#2ED573'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Ledakan Popularitas (Data Awal di USA)',
+                        font: { size: 16, family: 'Poppins' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Juta Pemain / Persentase (%)' }
+                    }
+                }
+            }
+        });
+
+        // 2. Techniques Chart (Donut)
+        const ctxTech = document.getElementById('techniquesChart').getContext('2d');
+        const labelsTech = ['Service (Bawah Tangan)', 'Dink (Permainan Net)', 'Drive (Pukulan Keras)', 'Volley (Udara)', 'Overhead Smash', 'Lob'];
+        const processedLabelsTech = labelsTech.map(l => splitLabel(l));
+
+        new Chart(ctxTech, {
+            type: 'doughnut',
+            data: {
+                labels: processedLabelsTech,
+                datasets: [{
+                    data: [15, 30, 20, 20, 10, 5], // Estimated conceptual weight based on game importance
+                    backgroundColor: ['#FF4757', '#2ED573', '#FFA502', '#2F3542', '#3742fa', '#a4b0be'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: tooltipConfig,
+                    legend: {
+                        position: 'bottom',
+                        labels: { boxWidth: 12, padding: 15, font: { family: 'Poppins' } }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Komposisi Teknik Permainan',
+                        font: { size: 16, family: 'Poppins' }
+                    }
+                }
+            }
+        });
+
+        // 3. Benefits Chart (Radar)
+        const ctxBenefits = document.getElementById('benefitsChart').getContext('2d');
+        const labelsBenefits = ['Kesehatan Jantung', 'Keseimbangan Fisik', 'Interaksi Sosial', 'Kesehatan Mental', 'Minim Cedera', 'Kemudahan Akses'];
+        const processedLabelsBenefits = labelsBenefits.map(l => splitLabel(l));
+
+        new Chart(ctxBenefits, {
+            type: 'radar',
+            data: {
+                labels: processedLabelsBenefits,
+                datasets: [{
+                    label: 'Skor Manfaat',
+                    data: [85, 90, 95, 90, 85, 95], // Conceptual scoring based on text emphasis
+                    fill: true,
+                    backgroundColor: 'rgba(46, 213, 115, 0.2)',
+                    borderColor: '#2ED573',
+                    pointBackgroundColor: '#FF4757',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#FF4757'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                elements: {
+                    line: { borderWidth: 3 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 50,
+                        suggestedMax: 100,
+                        ticks: { display: false } // Hide numbers for cleaner look
+                    }
+                },
+                plugins: {
+                    tooltip: tooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Profil Manfaat Olahraga',
+                        font: { size: 16, family: 'Poppins' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
